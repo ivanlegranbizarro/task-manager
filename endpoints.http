@@ -1,40 +1,62 @@
+POST http://127.0.0.1:8000/api/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "ndamore@example.net",
+    "password": "password"
+}
+###
 GET http://127.0.0.1:8000/api/tasks
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer {token}
 ###
-
 GET http://127.0.0.1:8000/api/tasks?page=2
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer {token}
 ###
 GET http://127.0.0.1:8000/api/tasks?completed=1
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer {token}
 ###
 GET http://127.0.0.1:8000/api/tasks?title=dolor
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer {token}
 ###
 
 GET http://127.0.0.1:8000/api/tasks?order=desc
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer {token}
+###
+
+GET http://127.0.0.1:8000/api/tasks?order=asc
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {token}
 ###
 
 GET http://127.0.0.1:8000/api/tasks/2
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer {token}
 ###
 POST http://127.0.0.1:8000/api/tasks/
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer 3|dTxYf95MLYbXTWaoGLX82woJyQMgY8dMwBWiMMSc8e9e1517
 
 {
-    "title": "Buy beers",
-    "completed": false
+    "title": "Feed my cobayas",
+    "completed": true
 }
 ###
 PUT http://127.0.0.1:8000/api/tasks/2
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer {token}
 ###
