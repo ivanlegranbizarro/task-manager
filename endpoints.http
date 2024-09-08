@@ -48,7 +48,7 @@ Authorization: Bearer {token}
 POST http://127.0.0.1:8000/api/tasks/
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer 3|dTxYf95MLYbXTWaoGLX82woJyQMgY8dMwBWiMMSc8e9e1517
+Authorization: Bearer {token}
 
 {
     "title": "Feed my cobayas",
