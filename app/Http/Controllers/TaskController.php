@@ -22,9 +22,11 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTaskRequest $request)
+    public function store(StoreTaskRequest $request): JsonResponse
     {
-        //
+        $task = Task::create($request->validated());
+
+        return response()->json(new TaskResource($task), 201);
     }
 
     /**
@@ -40,7 +42,9 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        $task->update($request->validated());
+
+        return response()->json(new TaskResource($task), 200);
     }
 
     /**
@@ -48,6 +52,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+
+        return response()->json(null, 204);
     }
 }
