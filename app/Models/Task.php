@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Task extends Model
 {
@@ -41,5 +42,11 @@ class Task extends Model
             }
             return $query;
         }
+    }
+
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_id');
     }
 }
