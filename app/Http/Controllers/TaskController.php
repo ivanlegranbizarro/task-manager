@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class TaskController extends Controller
@@ -14,9 +15,15 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json(new TaskCollection(Task::all()));
+        $tasks = Task::query()
+            ->completed($request->input('completed'))
+            ->title($request->input('title'))
+            ->orderByTitle($request->input('order', 'asc'))
+            ->get();
+
+        return response()->json(new TaskCollection($tasks));
     }
 
     /**

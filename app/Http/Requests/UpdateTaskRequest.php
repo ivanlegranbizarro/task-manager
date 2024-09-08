@@ -23,7 +23,7 @@ class UpdateTaskRequest extends FormRequest
     {
         return [
             'title' => ['string', 'min:3', 'max:255'],
-            'completed' => ['boolean'],
+            'completed' => ['sometimes', 'boolean'],
         ];
     }
 }
