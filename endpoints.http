@@ -3,7 +3,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "email": "ndamore@example.net",
+    "email": "howell.thad@example.net",
     "password": "password"
 }
 ###
@@ -51,7 +51,7 @@ Accept: application/json
 Authorization: Bearer {token}
 
 {
-    "title": "Feed my cobayas",
+    "title": "Comprar pizzas",
     "completed": true
 }
 ###
