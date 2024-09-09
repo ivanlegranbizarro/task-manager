@@ -10,6 +10,7 @@ use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -18,14 +19,17 @@ class TaskController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $tasks = Task::query()
-            ->completed($request->input('completed'))
+        $tasksQuery = Auth::user()->tasks();
+
+        $tasksQuery->completed($request->input('completed'))
             ->title($request->input('title'))
-            ->orderByTitle($request->input('order', 'asc'))
-            ->get();
+            ->orderByTitle($request->input('order', 'asc'))->get();
+
+        $tasks = $tasksQuery->get();
 
         return response()->json(new TaskCollection($tasks));
     }
+
 
     /**
      * Store a newly created resource in storage.

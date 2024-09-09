@@ -10,7 +10,7 @@ Accept: application/json
 GET http://127.0.0.1:8000/api/tasks
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer {token}
+Authorization: Bearer 3|4DERzj4ezrLOlYYcFRimwqpi8UNTHHr7F7ZcMVJbef86545d
 ###
 GET http://127.0.0.1:8000/api/tasks?page=2
 Content-Type: application/json
@@ -59,4 +59,25 @@ PUT http://127.0.0.1:8000/api/tasks/2
 Content-Type: application/json
 Accept: application/json
 Authorization: Bearer {token}
+###
+GET http://127.0.0.1:8000/api/projects
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 3|4DERzj4ezrLOlYYcFRimwqpi8UNTHHr7F7ZcMVJbef86545d
+###
+
+GET http://127.0.0.1:8000/api/projects/1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 2|4jMpS9cP6MUFZTLPQN68i3wP284UViCx1xd5Z7iD7acb9008
+###
+
+POST http://127.0.0.1:8000/api/projects
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 3|4DERzj4ezrLOlYYcFRimwqpi8UNTHHr7F7ZcMVJbef86545d
+
+{
+    "title": "My project"
+}
 ###

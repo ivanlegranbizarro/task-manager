@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -15,7 +16,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Auth::user()->projects;
+
+        return response()->json(ProjectResource::collection($projects));
     }
 
     /**
@@ -31,9 +34,9 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show(Project $project): JsonResponse
     {
-        //
+        return response()->json(new ProjectResource($project), 200);
     }
 
     /**
