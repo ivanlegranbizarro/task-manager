@@ -17,7 +17,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Auth::user()->projects;
+        $projects = Auth::user()->projects()->paginate(10);
         $projectCollection = new ProjectCollection($projects);
 
         return response()->json($projectCollection, 200);
