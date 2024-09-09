@@ -24,6 +24,7 @@ class UpdateTaskRequest extends FormRequest
         return [
             'title' => ['string', 'min:3', 'max:255'],
             'completed' => ['sometimes', 'boolean'],
+            'project_id' => ['sometimes', 'exists:projects,id'],
         ];
     }
 }

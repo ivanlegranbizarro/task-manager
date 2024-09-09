@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
+use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -29,9 +30,15 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTaskRequest $request): JsonResponse
+    public function store(StoreTaskRequest $request, Project $project = null): JsonResponse
     {
-        $task = Task::create($request->validated());
+        $data = $request->validated();
+
+        if ($project) {
+            $data['project_id'] = $project->id;
+        }
+
+        $task = Task::create($data);
 
         return response()->json(new TaskResource($task), 201);
     }

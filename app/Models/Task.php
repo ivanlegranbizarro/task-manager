@@ -12,7 +12,7 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'completed'];
+    protected $fillable = ['title', 'completed', 'project_id'];
 
     protected $hidden = ['updated_at'];
 
@@ -48,7 +48,7 @@ class Task extends Model
 
     protected static function booted(): void
     {
-        static::addGlobalScope('creator', function ($builder) {
+        static::addGlobalScope('creator', function (Builder $builder) {
             $builder->where('creator_id', auth()->id());
         });
 

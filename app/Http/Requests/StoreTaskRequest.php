@@ -24,6 +24,7 @@ class StoreTaskRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'min:3', 'max:255'],
             'completed' => ['required', 'boolean'],
+            'project_id' => ['nullable', 'exists:projects,id'],
         ];
     }
 }
