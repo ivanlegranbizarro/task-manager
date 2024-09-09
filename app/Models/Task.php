@@ -48,13 +48,15 @@ class Task extends Model
 
     protected static function booted(): void
     {
-        static::addGlobalScope('creator', function (Builder $builder) {
+        static::addGlobalScope('creator', function ($builder) {
             $builder->where('creator_id', auth()->id());
         });
 
-        static::creating(function ($task) {
-            $task->creator_id = auth()->id();
-        });
+        if (!app()->runningInConsole()) {
+            static::creating(function ($task) {
+                $task->creator_id = auth()->id();
+            });
+        }
     }
 
 

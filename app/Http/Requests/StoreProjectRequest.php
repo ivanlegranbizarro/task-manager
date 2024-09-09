@@ -22,8 +22,7 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|min:3|max:255',
-            'creator_id' => 'required|exists:users,id',
+            'title' => 'required|string|min:3|max:255'
         ];
     }
 }

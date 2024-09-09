@@ -12,14 +12,20 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'creator_id'];
 
 
     protected static function booted(): void
     {
-        static::addGlobalScope('creator', function (Builder $builder) {
+        static::addGlobalScope('creator', function ($builder) {
             $builder->where('creator_id', auth()->id());
         });
+
+        if (!app()->runningInConsole()) {
+            static::creating(function ($task) {
+                $task->creator_id = auth()->id();
+            });
+        }
     }
 
     public function tasks()
