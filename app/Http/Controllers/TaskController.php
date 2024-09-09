@@ -51,7 +51,10 @@ class TaskController extends Controller
     {
         $task->update($request->validated());
 
-        return response()->json(new TaskResource($task), 200);
+        return response()->json([
+            'message' => 'Task updated successfully',
+            'task' => new TaskResource($task),
+        ], 200);
     }
 
     /**

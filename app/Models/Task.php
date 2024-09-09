@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Task extends Model
@@ -60,5 +61,11 @@ class Task extends Model
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
+    }
+
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }
 }
