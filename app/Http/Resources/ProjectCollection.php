@@ -14,6 +14,14 @@ class ProjectCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'data' => $this->collection->map(function ($project) {
+                return [
+                    'id' => $project->id,
+                    'title' => $project->title,
+                    'tasks' => ProjectCollection::collection($project->tasks),
+                ];
+            }),
+        ];
     }
 }

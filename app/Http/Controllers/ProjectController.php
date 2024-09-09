@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Http\Resources\ProjectCollection;
 use App\Http\Resources\ProjectResource;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
@@ -17,8 +18,9 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Auth::user()->projects;
+        $projectCollection = new ProjectCollection($projects);
 
-        return response()->json(ProjectResource::collection($projects));
+        return response()->json($projectCollection, 200);
     }
 
     /**
