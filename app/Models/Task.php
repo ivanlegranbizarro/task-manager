@@ -29,7 +29,6 @@ class Task extends Model
         if (! is_null($title)) {
             return $query->where('title', 'like', "%{$title}%");
         }
-
         return $query;
     }
 
@@ -41,8 +40,8 @@ class Task extends Model
             } elseif ($order === 'desc') {
                 return $query->orderByDesc('title');
             }
-            return $query;
         }
+        return $query;
     }
 
     protected static function booted(): void
