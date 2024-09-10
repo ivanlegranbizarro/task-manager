@@ -38,7 +38,10 @@ class ProjectController extends Controller
      */
     public function show(Project $project): JsonResponse
     {
-        return response()->json(new ProjectResource($project), 200);
+        $project = new ProjectResource($project);
+        $project->load(['tasks', 'members']);
+
+        return response()->json($project, 200);
     }
 
     /**

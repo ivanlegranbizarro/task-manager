@@ -3,7 +3,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "email": "howell.thad@example.net",
+    "email": "terry.sibyl@example.net",
     "password": "password"
 }
 ###
@@ -66,10 +66,10 @@ Accept: application/json
 Authorization: Bearer 3|4DERzj4ezrLOlYYcFRimwqpi8UNTHHr7F7ZcMVJbef86545d
 ###
 
-GET http://127.0.0.1:8000/api/projects/1
+GET http://127.0.0.1:8000/api/projects/11
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer 2|4jMpS9cP6MUFZTLPQN68i3wP284UViCx1xd5Z7iD7acb9008
+Authorization: Bearer 1|LYcygkAWiK288jkkpGbzMBzhuqSi86sGWK1Nfj4A23d8018e
 ###
 
 POST http://127.0.0.1:8000/api/projects

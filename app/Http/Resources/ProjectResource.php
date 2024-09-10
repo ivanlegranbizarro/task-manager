@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\TaskResource;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProjectResource extends JsonResource
@@ -14,6 +16,12 @@ class ProjectResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
+            'members' => UserResource::collection($this->whenLoaded('members')),
+            'created_at' => $this->created_at,
+        ];
     }
 }

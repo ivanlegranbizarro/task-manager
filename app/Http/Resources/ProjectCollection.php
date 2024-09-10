@@ -19,7 +19,6 @@ class ProjectCollection extends ResourceCollection
                 return [
                     'id' => $project->id,
                     'title' => $project->title,
-                    'tasks' => ProjectCollection::collection($project->tasks),
                 ];
             }),
         ];
