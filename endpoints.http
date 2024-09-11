@@ -63,13 +63,13 @@ Authorization: Bearer {token}
 GET http://127.0.0.1:8000/api/projects
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer 3|4DERzj4ezrLOlYYcFRimwqpi8UNTHHr7F7ZcMVJbef86545d
+Authorization: Bearer 2|T4ibY6hEsxVXmwSGxultZ4zgU4TLSAPe0Kxq48faca5d509b
 ###
 
 GET http://127.0.0.1:8000/api/projects/11
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer 1|LYcygkAWiK288jkkpGbzMBzhuqSi86sGWK1Nfj4A23d8018e
+Authorization: Bearer 2|T4ibY6hEsxVXmwSGxultZ4zgU4TLSAPe0Kxq48faca5d509b
 ###
 
 POST http://127.0.0.1:8000/api/projects

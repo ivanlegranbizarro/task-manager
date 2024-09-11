@@ -9,6 +9,7 @@ use App\Http\Resources\ProjectResource;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProjectController extends Controller
 {
@@ -17,11 +18,21 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Auth::user()->projects()->paginate(10);
+        $user = Auth::user();
+
+        $projectsAsCreator = $user->projects();
+
+        $projectsAsMember = Project::whereHas('members', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        });
+
+        $projects = $projectsAsCreator->union($projectsAsMember)->paginate(10);
+
         $projectCollection = new ProjectCollection($projects);
 
         return response()->json($projectCollection, 200);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -38,6 +49,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project): JsonResponse
     {
+        Gate::authorize('view', $project);
         $project = new ProjectResource($project);
         $project->load(['tasks', 'members']);
 
@@ -49,6 +61,7 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project): JsonResponse
     {
+        Gate::authorize('update', $project);
         $project->update($request->validated());
 
         return response()->json([
@@ -62,6 +75,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        Gate::authorize('delete', $project);
         $project->delete();
         return response()->json(null, 204);
     }

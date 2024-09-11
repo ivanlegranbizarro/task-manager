@@ -21,7 +21,13 @@ class ProjectPolicy
      */
     public function view(User $user, Project $project): bool
     {
-        //
+        if ($user->id === $project->creator_id) {
+            return true;
+        } elseif ($user->memberships()->where('project_id', $project->id)->exists()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -37,7 +43,7 @@ class ProjectPolicy
      */
     public function update(User $user, Project $project): bool
     {
-        //
+        return $user->id === $project->creator_id;
     }
 
     /**
@@ -45,7 +51,7 @@ class ProjectPolicy
      */
     public function delete(User $user, Project $project): bool
     {
-        //
+        return $user->id === $project->creator_id;
     }
 
     /**
