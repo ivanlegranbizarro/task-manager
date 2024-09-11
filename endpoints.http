@@ -3,7 +3,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "email": "terry.sibyl@example.net",
+    "email": "zackary.pfannerstill@example.org",
     "password": "password"
 }
 ###
@@ -63,21 +63,31 @@ Authorization: Bearer {token}
 GET http://127.0.0.1:8000/api/projects
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer 2|T4ibY6hEsxVXmwSGxultZ4zgU4TLSAPe0Kxq48faca5d509b
+Authorization: Bearer 4|EfqMZXMtrDvJMBLTOljv99yorlKQDtNnfTNhxZpU377f54b8
 ###
 
 GET http://127.0.0.1:8000/api/projects/11
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer 2|T4ibY6hEsxVXmwSGxultZ4zgU4TLSAPe0Kxq48faca5d509b
+Authorization: Bearer 4|EfqMZXMtrDvJMBLTOljv99yorlKQDtNnfTNhxZpU377f54b8
 ###
 
 POST http://127.0.0.1:8000/api/projects
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer 3|4DERzj4ezrLOlYYcFRimwqpi8UNTHHr7F7ZcMVJbef86545d
+Authorization: Bearer 4|EfqMZXMtrDvJMBLTOljv99yorlKQDtNnfTNhxZpU377f54b8
 
 {
     "title": "My project"
+}
+###
+
+DELETE http://127.0.0.1:8000/api/projects/11/remove-members
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 4|EfqMZXMtrDvJMBLTOljv99yorlKQDtNnfTNhxZpU377f54b8
+
+{
+    "user_ids": [1]
 }
 ###
