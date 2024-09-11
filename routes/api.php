@@ -11,4 +11,5 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('tasks', TaskController::class);
     Route::apiResource('projects', ProjectController::class);
+    Route::post('projects/{project}/add-members', [ProjectController::class, 'addMembers'])->name('projects.addMembers');
 });

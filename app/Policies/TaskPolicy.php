@@ -21,7 +21,12 @@ class TaskPolicy
      */
     public function view(User $user, Task $task): bool
     {
-        //
+        if ($user->id === $task->creator_id) {
+            return true;
+        } elseif ($user->memberships()->where('project_id', $task->project_id)->exists()) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -37,7 +42,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task): bool
     {
-        //
+        return $user->id === $task->creator_id;
     }
 
     /**
@@ -45,7 +50,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task): bool
     {
-        //
+        return $user->id === $task->creator_id;
     }
 
     /**

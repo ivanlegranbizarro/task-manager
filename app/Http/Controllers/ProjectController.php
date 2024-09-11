@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddMembersRequest;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectCollection;
@@ -78,5 +79,17 @@ class ProjectController extends Controller
         Gate::authorize('delete', $project);
         $project->delete();
         return response()->json(null, 204);
+    }
+
+
+    public function addMembers(AddMembersRequest $request, Project $project): JsonResponse
+    {
+        Gate::authorize('update', $project);
+
+        $project->members()->attach($request->user_ids);
+
+        return response()->json([
+            'message' => 'Members added successfully',
+        ], 200);
     }
 }
