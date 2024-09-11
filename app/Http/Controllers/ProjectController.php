@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddMembersRequest;
+use App\Http\Requests\RemoveMembersRequest;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectCollection;
@@ -90,6 +91,18 @@ class ProjectController extends Controller
 
         return response()->json([
             'message' => 'Members added successfully',
+        ], 200);
+    }
+
+
+    public function removeMembers(RemoveMembersRequest $request, Project $project): JsonResponse
+    {
+        Gate::authorize('update', $project);
+
+        $project->members()->detach($request->user_ids);
+
+        return response()->json([
+            'message' => 'Members removed successfully',
         ], 200);
     }
 }
