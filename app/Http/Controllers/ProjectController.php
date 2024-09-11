@@ -87,7 +87,7 @@ class ProjectController extends Controller
     {
         Gate::authorize('update', $project);
 
-        $project->members()->attach($request->user_ids);
+        $project->members()->syncWithoutDetaching($request->user_ids);
 
         return response()->json([
             'message' => 'Members added successfully',
@@ -95,11 +95,14 @@ class ProjectController extends Controller
     }
 
 
+
     public function removeMembers(RemoveMembersRequest $request, Project $project): JsonResponse
     {
         Gate::authorize('update', $project);
 
-        $project->members()->detach($request->user_ids);
+        $membersToRemove = $request->user_ids;
+
+        $project->members()->detach($membersToRemove);
 
         return response()->json([
             'message' => 'Members removed successfully',
