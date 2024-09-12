@@ -19,10 +19,12 @@ class Task extends Model
     public function scopeCompleted($query, $completed)
     {
         if (! is_null($completed)) {
+            $completed = filter_var($completed, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
             return $query->where('completed', $completed);
         }
         return $query;
     }
+
 
     public function scopeTitle($query, $title)
     {
