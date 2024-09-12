@@ -15,6 +15,10 @@ class Task extends Model
 
     protected $hidden = ['updated_at'];
 
+    protected $casts = [
+        'completed' => 'boolean',
+    ];
+
 
     public function scopeCompleted($query, $completed)
     {
