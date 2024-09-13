@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Http\Resources\CommentCollection;
 use App\Models\Comment;
 use App\Models\Task;
 use App\Models\Project;
@@ -18,7 +19,7 @@ class CommentController extends Controller
     public function index(Task|Project $model)
     {
         $comments = $model->comments()->with('user')->get();
-        return response()->json($comments);
+        return response()->json(CommentCollection::make($comments));
     }
 
     /**
