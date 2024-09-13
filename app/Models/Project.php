@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Task;
 use App\Models\User;
+use App\Models\Member;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -37,5 +39,10 @@ class Project extends Model
     public function members()
     {
         return $this->belongsToMany(User::class, Member::class, 'project_id', 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

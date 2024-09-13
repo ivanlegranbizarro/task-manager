@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Comment;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +12,7 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'completed', 'project_id'];
+    protected $fillable = ['title', 'completed', 'project_id', 'user_id'];
 
     protected $hidden = ['updated_at'];
 
@@ -69,5 +70,11 @@ class Task extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }
